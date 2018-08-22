@@ -1,5 +1,10 @@
 package md.jack.task1;
 
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 /**
  * Method that uses the generic TwoElementPredicate, rather than the
  * String-specific TwoStringPredicate.
@@ -25,5 +30,19 @@ public class ElementUtils
             return (element1);
         }
         return (element2);
+    }
+
+    public static <T> List<T> allMatches(List<T> theList, Predicate<T> condition)
+    {
+        return  theList.stream()
+                .filter(condition::test)
+                .collect(Collectors.toList());
+    }
+
+    public static <T,R> List<R> transformedList(List<T> theList, Function<T,R> function)
+    {
+        return  theList.stream()
+                .map(function::apply)
+                .collect(Collectors.toList());
     }
 }

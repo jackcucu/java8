@@ -1,5 +1,10 @@
 package md.jack.task1;
 
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 public class StringUtils
 {
     private StringUtils()
@@ -17,5 +22,19 @@ public class StringUtils
         {
             return (s2);
         }
+    }
+
+    public static List<String> allMatches(List<String> theList, Predicate<String> condition)
+    {
+        return  theList.stream()
+                .filter(condition::test)
+                .collect(Collectors.toList());
+    }
+
+    public static  List<String> transformedList(List<String> theList, Function<String,String> function)
+    {
+        return  theList.stream()
+                .map(function::apply)
+                .collect(Collectors.toList());
     }
 }

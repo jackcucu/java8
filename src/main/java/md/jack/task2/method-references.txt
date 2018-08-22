@@ -11,4 +11,9 @@ method4(() -> Math.random());
 With method references
 ======================
 
-??
+method1(x ,y ,Math::cos);
+someList.forEach(System.out::println);
+method2(a,b,c, Math::pow);
+someStream.reduce(0,Integer::sum);
+method3(foo , bar, Utils::doSomethingWith);
+method4(Math:random);
