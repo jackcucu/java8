@@ -10,11 +10,11 @@ public class Exercising {
 
         //1
         System.out.println("Words printed on separate line with 2 spaces in front:");
-        words.stream()
+        words
                 .forEach(it -> System.out.println("  "+it));
         //2
         System.out.println("Words printed on separte line with method reference");
-        words.stream()
+        words
                 .forEach(System.out::println);
         //3
         System.out.println("Different manipulation with strings:");
