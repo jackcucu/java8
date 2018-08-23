@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
-public class Exercising extends MathUtils
+import static md.jack.task8.MathUtils.randomArray;
+import static md.jack.task8.MathUtils.randomGenerator;
+
+public class Exercising
 {
     public static void main(String[] args)
     {

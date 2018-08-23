@@ -1,34 +1,31 @@
 package md.jack.task8;
 
 import java.util.Arrays;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 
 public class TimingTests
 {
     public static void main(String[] args)
     {
-        for (int i = 3; i < 8; i++)
-        {
-            int size = (int) Math.pow(10, i);
-            System.out.printf("Sorting array of length %,d.%n", size);
-            Op.timeOp(() -> sortArray(size));
-        }
+        IntStream.range(3, 8)
+                .map(it -> (int) Math.pow(10, it))
+                .peek(it -> System.out.printf("Sorting array of length %,d.%n", it))
+                .forEach(it -> Op.timeOp(() -> sortArray(it)));
     }
 
     /** Make an n-length array of random numbers. */
 
     private static double[] randomNums(int length)
     {
-        double[] nums = new double[length];
-        for (int i = 0; i < length; i++)
-        {
-            nums[i] = Math.random();
-        }
-        return (nums);
+        return DoubleStream.generate(Math::random)
+                .limit(length)
+                .toArray();
     }
 
     private static void sortArray(final int length)
     {
-        double[] nums = randomNums(length);
+        final double[] nums = randomNums(length);
         Arrays.sort(nums);
     }
 }

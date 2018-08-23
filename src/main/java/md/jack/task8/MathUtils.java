@@ -4,8 +4,12 @@ import java.util.Random;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
-class MathUtils
+final class MathUtils
 {
+    private MathUtils()
+    {
+
+    }
 
     static double[] randomArray(final long size)
     {

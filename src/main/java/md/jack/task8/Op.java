@@ -30,9 +30,12 @@ public interface Op
 
     default Op combinedOp(Op secondOp)
     {
-        return (() -> {
-            runOp();
-            secondOp.runOp();
-        });
+        return (() -> run(secondOp));
+    }
+
+    default void run(final Op secondOp)
+    {
+        runOp();
+        secondOp.runOp();
     }
 }
