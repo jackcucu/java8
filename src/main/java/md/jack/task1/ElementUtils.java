@@ -3,22 +3,15 @@ package md.jack.task1;
 /**
  * Method that uses the generic TwoElementPredicate, rather than the
  * String-specific TwoStringPredicate.
- * <p>
- * From <a href="http://courses.coreservlets.com/Course-Materials/">the
- * coreservlets.com tutorials on JSF 2, PrimeFaces, Ajax, JavaScript, jQuery, GWT, Android,
- * Spring, Hibernate, JPA, RESTful Web Services, Hadoop, Spring MVC,
- * servlets, JSP, Java 8 lambdas and streams (for those that know Java already),
- * and Java 8 programming (for those new to Java)</a>.
  */
 
-public class ElementUtils
+public final class ElementUtils
 {
     private ElementUtils()
     {
-    } // Uninstantiatable class; contains only static methods.
+    }
 
-    public static <T> T betterElement(T element1, T element2,
-                                      TwoElementPredicate<T> tester)
+    public static <T> T betterElement(final T element1, final T element2, final TwoElementPredicate<T> tester)
     {
         if (tester.isBetter(element1, element2))
         {

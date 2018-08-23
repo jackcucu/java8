@@ -1,12 +1,12 @@
 package md.jack.task2;
 
-public class StringUtils
+public final class StringUtils
 {
     private StringUtils()
     {
-    } // Uninstantiatable class; contains only static methods.
+    }
 
-    public static int eChecker(String s1, String s2)
+    public static int eChecker(final String s1, final String s2)
     {
         int compareFlag = 0;
         if (s1.contains("e") && !s2.contains("e"))
@@ -20,8 +20,7 @@ public class StringUtils
         return (compareFlag);
     }
 
-    public static String betterString(String s1, String s2,
-                                      TwoStringPredicate tester)
+    public static String betterString(final String s1, final String s2, final TwoStringPredicate tester)
     {
         if (tester.isBetter(s1, s2))
         {

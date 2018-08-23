@@ -1,4 +1,4 @@
-package md.jack.task1-1-exerci;
+package md.jack.task1;
 
 public class IsBetterExamples
 {
