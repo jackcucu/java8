@@ -1,36 +1,38 @@
 package md.jack.task5;
 
-import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class FunctionUtils {
+class FunctionUtils
+{
 
-    public static <T> Predicate<T> allPassPredicate(Predicate<T>... predicates)
+    private static <T> Predicate<T> allPassPredicate(final Predicate<T>... predicates)
     {
-       return Arrays.asList(predicates).stream()
+        return Stream.of(predicates)
                 .reduce(Predicate::and)
                 .orElse(t->true);
     }
 
-    public static <T> T  firstAllMatch(Stream<T> streams, Predicate<T>... predicates)
+    @SafeVarargs
+    private static <T> T firstAllMatch(final Stream<T> streams, final Predicate<T>... predicates)
     {
-        Predicate<T> test = allPassPredicate(predicates);
+        final Predicate<T> test = allPassPredicate(predicates);
         return streams.filter(test)
                 .findFirst()
                 .orElse(null);
     }
 
-    public static <T> Predicate<T> anyPassPredicate(Predicate<T>... predicates)
+    private static <T> Predicate<T> anyPassPredicate(final Predicate<T>... predicates)
     {
-        return Arrays.asList(predicates).stream()
+        return Stream.of(predicates)
                 .reduce(Predicate::or)
                 .orElse(t->false);
     }
 
-    public static <T> T firstAnyMatch(Stream<T> streams, Predicate<T>... predicates)
+    @SafeVarargs
+    private static <T> T firstAnyMatch(final Stream<T> streams, final Predicate<T>... predicates)
     {
-        Predicate<T> test = anyPassPredicate(predicates);
+        final Predicate<T> test = anyPassPredicate(predicates);
         return streams.filter(test)
                 .findFirst()
                 .orElse(null);

@@ -1,22 +1,20 @@
 package md.jack.task4;
 
 
+import java.util.stream.Stream;
+
 public interface RegularPolygon {
-
-    public abstract int getNumSides();
-
-    public abstract double getSideLength();
 
     static  int totalSides(RegularPolygon[] regularPolygons)
     {
-     int sum = 0;
-        for (RegularPolygon polygon:regularPolygons
-             ) {
-            sum += polygon.getNumSides();
-        }
-        return sum;
+        return Stream.of(regularPolygons)
+                .mapToInt(RegularPolygon::getNumSides)
+                .sum();
     }
 
+    int getNumSides();
+
+    double getSideLength();
     default double getPerimeter()
     {
      return (getNumSides() * getSideLength());
