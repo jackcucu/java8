@@ -3,7 +3,8 @@ package md.jack.task9;
 import java.math.BigInteger;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * A few utilities to generate a large random BigInteger,
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
  * and Java 8 programming (for those new to Java)</a>.
  */
 
-public class Primes
+final public class Primes
 {
     private static final BigInteger ZERO = BigInteger.ZERO;
     private static final BigInteger ONE = BigInteger.ONE;
@@ -36,60 +37,47 @@ public class Primes
     {
     } // Uninstantiatable class
 
-    public static boolean isPrime(BigInteger possiblePrime)
+    public static boolean isPrime(final BigInteger possiblePrime)
     {
         return (possiblePrime.isProbablePrime(ERR_VAL));
     }
 
-    public static boolean isPrime(long possiblePrime)
+    public static boolean isPrime(final long possiblePrime)
     {
         return (isPrime(new BigInteger(Long.toString(possiblePrime))));
     }
 
     /** Finds the next prime number above a threshold. */
 
-    private static BigInteger nextPrime(BigInteger start)
+    private static BigInteger nextPrime(final BigInteger start)
     {
-        if (isEven(start))
-        {
-            start = start.add(ONE);
-        }
-        else
-        {
-            start = start.add(TWO);
-        }
-        if (isPrime(start))
-        {
-            return (start);
-        }
-        return (nextPrime(start));
+        final BigInteger zero = BigInteger.ZERO;
+
+        final BigInteger integer = isEven(start)
+                ? zero.add(start).add(ONE)
+                : zero.add(start).add(TWO);
+
+        return isPrime(integer) ? integer : nextPrime(integer);
     }
 
     /**
      * Generates a random number of the given length,
      * then finds the first prime number above that random number.
      */
-    public static BigInteger findPrime(int numDigits)
+    public static BigInteger findPrime(final int numDigits)
     {
-        if (numDigits < 1)
-        {
-            numDigits = 1;
-        }
-        return (nextPrime(randomNum(numDigits)));
+        return numDigits < 1 ? nextPrime(randomNum(1)) : nextPrime(randomNum(numDigits));
     }
 
-    private static boolean isEven(BigInteger n)
+    private static boolean isEven(final BigInteger n)
     {
         return (n.mod(TWO).equals(ZERO));
     }
 
-    private static String randomDigit(boolean isZeroOk)
+    private static String randomDigit(final boolean isZeroOk)
     {
-        if (isZeroOk)
-        {
-            return (RandomUtils.randomElement(DIGITS));
-        }
-        return (RandomUtils.randomElement(NON_ZERO_DIGITS));
+        return isZeroOk ? RandomUtils.randomElement(DIGITS) : RandomUtils.randomElement(NON_ZERO_DIGITS);
+
     }
 
     /**
@@ -98,16 +86,13 @@ public class Primes
      * cannot be a zero).
      */
 
-    public static BigInteger randomNum(int numDigits)
+    public static BigInteger randomNum(final int numDigits)
     {
-        StringBuilder s = new StringBuilder();
-        // First digit must be non-zero.
-        s.append(randomDigit(false));
+        final String collect = IntStream.range(0, numDigits - 1)
+                .mapToObj(it -> randomDigit(true))
+                .collect(Collectors.joining("", randomDigit(false), ""));
 
-        Stream.of(numDigits)
-                .forEach(String -> s.append(randomDigit(true)));
-
-        return (new BigInteger(s.toString()));
+        return new BigInteger(collect);
     }
 
     /**

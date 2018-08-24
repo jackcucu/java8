@@ -10,8 +10,13 @@ import java.util.Random;
  * Spring, Hibernate, JPA, RESTful Web Services, Hadoop,
  * servlets, JSP, and Java 7 and Java 8 programming</a>.
  */
-public class RandomUtils
+public final class RandomUtils
 {
+    private RandomUtils()
+    {
+
+    }
+
     public static Random r = new Random();
 
     /**
@@ -19,7 +24,7 @@ public class RandomUtils
      * returns any of 0, 1, 2, or 3.
      */
 
-    public static int randomInt(int range)
+    public static int randomInt(final int range)
     {
         return (r.nextInt(range));
     }
@@ -37,7 +42,7 @@ public class RandomUtils
      * for the return value.
      */
 
-    public static <T> T randomElement(T[] array)
+    public static <T> T randomElement(final T[] array)
     {
         return (array[randomIndex(array)]);
     }
