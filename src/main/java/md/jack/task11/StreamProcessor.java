@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 @FunctionalInterface
 public interface StreamProcessor
 {
-    static void processFile(String filename, StreamProcessor processor)
+    static void processFile(final String filename, final StreamProcessor processor)
     {
         try (Stream<String> lines = Files.lines(Paths.get(filename)))
         {
@@ -21,4 +21,5 @@ public interface StreamProcessor
     }
 
     void processStream(Stream<String> stringStream);
+
 }
