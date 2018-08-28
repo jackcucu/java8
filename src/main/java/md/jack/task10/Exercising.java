@@ -97,7 +97,7 @@ public class Exercising
                 .limit(17)
                 .collect(Collectors.toList());
 
-        try (final PrintWriter out = new PrintWriter(Files.newBufferedWriter(Paths.get(filename), Charset.defaultCharset())))
+        try (PrintWriter out = new PrintWriter(Files.newBufferedWriter(Paths.get(filename), Charset.defaultCharset())))
         {
             doubles.forEach(it -> out.printf("Number %5.3f%n", it));
 
