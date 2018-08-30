@@ -2,7 +2,7 @@ package md.jack.task11;
 
 import java.util.stream.Stream;
 
-public class WordUtils
+public final class WordUtils
 {
     private WordUtils()
     {
